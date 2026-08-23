@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "YKS HTML",
+  "version": "1.0.0",
+  "description": "SidePanel para testar HTML com estética CRT phosphor-purple terminal",
+  "permissions": ["sidePanel", "storage", "tabs"],
+  "side_panel": {
+    "default_path": "sidepanel/sidepanel.html"
+  },
+  "action": {
+    "default_title": "YKS HTML — Abrir SidePanel"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

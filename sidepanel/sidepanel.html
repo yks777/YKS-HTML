@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YKS HTML</title>
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+  <div class="scanlines"></div>
+
+  <div class="terminal-window">
+    <div class="title-bar">
+      <div class="traffic-lights">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+      <div class="path-label">~/yks-html/index.html</div>
+    </div>
+
+    <div class="command-line">
+      <span class="prompt">$</span>
+      <span class="command-text" id="commandText">cat index.html</span>
+      <span class="cursor blink">█</span>
+    </div>
+
+    <!-- EDITOR MODE -->
+    <div class="editor-section" id="editorSection">
+      <div class="panel-header">
+        <span class="panel-label">[EDITOR]</span>
+        <span class="line-count" id="lineCount">1 lines</span>
+      </div>
+      <div class="editor-wrapper">
+        <div class="line-numbers" id="lineNumbers">1</div>
+        <textarea 
+          id="codeEditor" 
+          spellcheck="false" 
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          placeholder="$ digite ou cole seu HTML aqui..."
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="view-actions" id="viewActions">
+      <button class="view-btn" id="btnView" title="Renderizar HTML">[ Ver HTML ]</button>
+    </div>
+
+    <!-- PREVIEW MODE -->
+    <div class="preview-section hidden" id="previewSection">
+      <div class="panel-header">
+        <span class="panel-label">[PREVIEW]</span>
+        <button class="back-btn" id="btnBack" title="Voltar ao editor">[ Voltar ]</button>
+      </div>
+      <iframe 
+        id="previewFrame" 
+        sandbox="allow-scripts allow-same-origin"
+        title="Preview"
+      ></iframe>
+    </div>
+
+    <div class="toolbar">
+      <button class="tool-btn" id="btnSave" title="Salvar snippet">[Save]</button>
+      <button class="tool-btn" id="btnLoad" title="Carregar snippet">[Load]</button>
+      <button class="tool-btn" id="btnTemplates" title="Templates prontos">[Templates]</button>
+      <button class="tool-btn" id="btnClear" title="Limpar editor">[Clear]</button>
+    </div>
+
+    <div class="footer">
+      <span class="footer-text">$ git status — yks-html v1.0.0 — ready</span>
+    </div>
+  </div>
+
+  <!-- Templates Modal -->
+  <div class="modal-overlay" id="templatesModal">
+    <div class="modal terminal-modal">
+      <div class="modal-header">
+        <span class="modal-title">$ select template</span>
+        <button class="modal-close" id="closeTemplates">[x]</button>
+      </div>
+      <div class="modal-body" id="templatesList"></div>
+    </div>
+  </div>
+
+  <!-- Save Modal -->
+  <div class="modal-overlay" id="saveModal">
+    <div class="modal terminal-modal">
+      <div class="modal-header">
+        <span class="modal-title">$ save snippet</span>
+        <button class="modal-close" id="closeSave">[x]</button>
+      </div>
+      <div class="modal-body">
+        <label class="input-label">> name:</label>
+        <input 
+          type="text" 
+          id="saveNameInput" 
+          class="terminal-input"
+          placeholder="meu-snippet"
+          autocomplete="off"
+        >
+        <div class="modal-actions">
+          <button class="tool-btn" id="confirmSave">[confirm]</button>
+          <button class="tool-btn" id="cancelSave">[cancel]</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load Modal -->
+  <div class="modal-overlay" id="loadModal">
+    <div class="modal terminal-modal">
+      <div class="modal-header">
+        <span class="modal-title">$ load snippet</span>
+        <button class="modal-close" id="closeLoad">[x]</button>
+      </div>
+      <div class="modal-body" id="loadList"></div>
+    </div>
+  </div>
+
+  <script src="templates.js"></script>
+  <script src="storage.js"></script>
+  <script src="editor.js"></script>
+  <script src="preview.js"></script>
+  <script src="sidepanel.js"></script>
+</body>
+</html>
