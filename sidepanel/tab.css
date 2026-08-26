@@ -38,9 +38,33 @@ html, body {
 }
 
 /* Editor reaproveita estilos do sidepanel.css
-   (.editor-wrapper, .line-numbers, textarea) */
+   (.editor-wrapper, .line-numbers). O textarea precisa de regra
+   própria pois sidepanel.css estiliza apenas #codeEditor. */
 .editor-pane .editor-wrapper {
   flex: 1;
+  min-height: 0;
+}
+
+.editor-pane textarea {
+  flex: 1;
+  padding: 8px 10px;
+  background: transparent;
+  border: none;
+  color: var(--text-heading);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.6;
+  resize: none;
+  outline: none;
+  tab-size: 2;
+  white-space: pre;
+  overflow: auto;
+  caret-color: var(--accent);
+}
+
+.editor-pane textarea::placeholder {
+  color: var(--accent-faint);
+  opacity: 0.6;
 }
 
 .preview-pane iframe {
