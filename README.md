@@ -14,6 +14,8 @@ Side panel para testar HTML
 - **Save/Load de snippets** (máximo 50 salvos)
 - **Auto-save** a cada 5 segundos
 - **Design CRT** com scanlines e tema roxo phosphor
+- **Aba inteira de teste** (`[ Aba ]`): abre uma aba do navegador com editor (esquerda) + preview (direita) em tela cheia
+- **Sync ao vivo** entre side panel e aba — editar em um atualiza o outro automaticamente
 
 ### Templates Inclusos
 
@@ -55,9 +57,19 @@ Side panel para testar HTML
    - **[Save]** — Salvar snippet atual
    - **[Load]** — Carregar snippet salvo
    - **[Templates]** — Selecionar template pronto
-   - **[Clear]** — Limpar editor
+    - **[Clear]** — Limpar editor
+    - **[ Aba ]** — Abrir aba inteira de teste (editor + preview em tela cheia, com sync ao vivo)
 
 5. Pressione `ESC` para voltar do preview ao editor
+
+### Aba inteira de teste
+
+O botão `[ Aba ]` abre uma aba do navegador dedicada a testar o HTML em tela cheia:
+
+- **Esquerda:** editor com numeração de linhas (mesmo do side panel)
+- **Direita:** preview em tempo real
+- Edições na aba sincronizam com o side panel e vice-versa (sem duplicar abas)
+- `[ Recarregar ]` re-renderiza o preview; `[ Fechar ]` fecha a aba
 
 ## Estrutura do Projeto
 
@@ -77,6 +89,10 @@ yks-html/
     ├── sidepanel.js       # Controlador principal da aplicação
     ├── editor.js          # Módulo do editor de código
     ├── preview.js         # Módulo de preview com iframe
+    ├── shared.js          # wrapWithTheme/emptyTemplate reutilizado (preview + aba)
+    ├── tab.html           # Aba inteira de teste (editor + preview)
+    ├── tab.css            # Layout de 2 colunas da aba
+    ├── tab.js             # Controller da aba (sync ao vivo via storage.session)
     ├── templates.js       # Templates HTML prontos
     └── storage.js         # Gerenciamento de armazenamento (chrome.storage)
 ```

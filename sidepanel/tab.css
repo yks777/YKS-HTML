@@ -1,0 +1,62 @@
+/* ============================================
+   YKS HTML — Tab Layout (2 colunas)
+   Reutiliza sidepanel.css para cores/glow/scanlines.
+   Aqui ficam apenas os ajustes de layout da aba.
+   ============================================ */
+
+/* Ocupa toda a viewport como aba inteira */
+html, body {
+  height: 100%;
+}
+
+.terminal-window {
+  height: 100vh;
+}
+
+/* Split editor (esq) + preview (dir) */
+.tab-split {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.tab-pane {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+}
+
+.editor-pane {
+  flex: 1 1 50%;
+  border-right: 1px solid var(--border-dim);
+}
+
+.preview-pane {
+  flex: 1 1 50%;
+}
+
+/* Editor reaproveita estilos do sidepanel.css
+   (.editor-wrapper, .line-numbers, textarea) */
+.editor-pane .editor-wrapper {
+  flex: 1;
+}
+
+.preview-pane iframe {
+  flex: 1;
+  border: none;
+  background: var(--bg-panel-alt);
+}
+
+/* Em telas estreitas, empilha verticalmente */
+@media (max-width: 640px) {
+  .tab-split {
+    flex-direction: column;
+  }
+
+  .editor-pane {
+    border-right: none;
+    border-bottom: 1px solid var(--border-dim);
+  }
+}

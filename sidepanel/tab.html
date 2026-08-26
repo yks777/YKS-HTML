@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YKS HTML — Aba de Teste</title>
+  <link rel="stylesheet" href="sidepanel.css">
+  <link rel="stylesheet" href="tab.css">
+</head>
+<body>
+  <div class="scanlines"></div>
+
+  <div class="terminal-window">
+    <div class="title-bar">
+      <div class="traffic-lights">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+      <div class="path-label">~/yks-html/index.html — fullscreen</div>
+    </div>
+
+    <div class="command-line">
+      <span class="prompt">$</span>
+      <span class="command-text" id="commandText">preview --fullscreen</span>
+      <span class="cursor blink">█</span>
+    </div>
+
+    <div class="tab-split">
+      <!-- EDITOR (esquerda) -->
+      <div class="tab-pane editor-pane">
+        <div class="panel-header">
+          <span class="panel-label">[EDITOR]</span>
+          <span class="line-count" id="tabLineCount">1 lines</span>
+        </div>
+        <div class="editor-wrapper">
+          <div class="line-numbers" id="tabLineNumbers">1</div>
+          <textarea
+            id="tabEditor"
+            spellcheck="false"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            placeholder="$ digite ou cole seu HTML aqui..."
+          ></textarea>
+        </div>
+      </div>
+
+      <!-- PREVIEW (direita) -->
+      <div class="tab-pane preview-pane">
+        <div class="panel-header">
+          <span class="panel-label">[PREVIEW]</span>
+          <button class="back-btn" id="btnReload" title="Recarregar preview">[ Recarregar ]</button>
+        </div>
+        <iframe
+          id="tabPreview"
+          sandbox="allow-scripts allow-same-origin"
+          title="Preview"
+        ></iframe>
+      </div>
+    </div>
+
+    <div class="toolbar">
+      <button class="tool-btn" id="btnClose" title="Fechar aba de teste">[ Fechar ]</button>
+    </div>
+
+    <div class="footer">
+      <span class="footer-text">$ git status — yks-html v1.0.0 — fullscreen preview</span>
+    </div>
+  </div>
+
+  <script src="shared.js"></script>
+  <script src="tab.js"></script>
+</body>
+</html>

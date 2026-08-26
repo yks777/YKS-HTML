@@ -4,6 +4,9 @@
 
 const App = (() => {
   let currentMode = 'editor';
+  const LIVE_KEY = 'yks-live';
+  const SENDER = 'sidepanel';
+  let applyingExternal = false;
 
   async function init() {
     Editor.init();
@@ -11,8 +14,34 @@ const App = (() => {
     await loadSavedCode();
     setupEventListeners();
     setupModals();
+    setupLiveSync();
     Storage.startAutoSave(() => Editor.getCode());
     Editor.focus();
+  }
+
+  /* ---------- Live sync (aba inteira) ---------- */
+  function setLive(code) {
+    return new Promise((resolve) => {
+      chrome.storage.session.set({ [LIVE_KEY]: { code, sender: SENDER } }, resolve);
+    });
+  }
+
+  function handleExternalChange(changes, area) {
+    if (area !== 'session') return;
+    const change = changes[LIVE_KEY];
+    if (!change || !change.newValue) return;
+    if (change.newValue.sender === SENDER) return;
+
+    applyingExternal = true;
+    Editor.setCode(change.newValue.code);
+    if (currentMode === 'preview') {
+      Preview.update(change.newValue.code);
+    }
+    applyingExternal = false;
+  }
+
+  function setupLiveSync() {
+    chrome.storage.onChanged.addListener(handleExternalChange);
   }
 
   async function loadSavedCode() {
@@ -28,7 +57,29 @@ const App = (() => {
     document.getElementById('btnSave').addEventListener('click', openSaveModal);
     document.getElementById('btnLoad').addEventListener('click', openLoadModal);
     document.getElementById('btnTemplates').addEventListener('click', openTemplatesModal);
+    document.getElementById('btnOpenTab').addEventListener('click', openTab);
     document.getElementById('btnClear').addEventListener('click', clearEditor);
+
+    Editor.onChange((code) => {
+      if (!applyingExternal) {
+        setLive(code);
+      }
+    });
+  }
+
+  async function openTab() {
+    const code = Editor.getCode();
+    await setLive(code);
+
+    const tabUrl = chrome.runtime.getURL('sidepanel/tab.html');
+    const tabs = await new Promise((resolve) =>
+      chrome.tabs.query({ url: tabUrl }, resolve)
+    );
+    if (tabs && tabs.length > 0) {
+      chrome.tabs.update(tabs[0].id, { active: true });
+    } else {
+      chrome.tabs.create({ url: tabUrl });
+    }
   }
 
   function showPreview() {
