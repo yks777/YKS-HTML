@@ -32,7 +32,7 @@ Side panel para testar HTML
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/NicolasToledoo/yks-html.git
+   git clone https://github.com/yks777/yks-html.git
    ```
 
 2. Abra o Chrome e acesse `chrome://extensions`
