@@ -261,7 +261,7 @@ body::after {
   font-variant-numeric: tabular-nums;
 }
 
-textarea#codeEditor {
+textarea#fonte {
   flex: 1;
   padding: 8px 10px;
   background: transparent;
@@ -278,7 +278,7 @@ textarea#codeEditor {
   caret-color: var(--accent);
 }
 
-textarea#codeEditor::placeholder {
+textarea#fonte::placeholder {
   color: var(--accent-faint);
   opacity: 0.6;
 }

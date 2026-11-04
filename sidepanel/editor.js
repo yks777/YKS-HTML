@@ -9,7 +9,7 @@ const Editor = (() => {
   let onChangeCallback = null;
 
   function init() {
-    textarea = document.getElementById('codeEditor');
+    textarea = document.getElementById('fonte');
     lineNumbers = document.getElementById('lineNumbers');
     lineCount = document.getElementById('lineCount');
 

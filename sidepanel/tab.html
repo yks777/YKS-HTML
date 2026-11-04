@@ -26,38 +26,38 @@
       <span class="cursor blink">█</span>
     </div>
 
-    <div class="tab-split">
-      <!-- EDITOR (esquerda) -->
-      <div class="tab-pane editor-pane">
-        <div class="panel-header">
-          <span class="panel-label">[EDITOR]</span>
-          <span class="line-count" id="tabLineCount">1 lines</span>
-        </div>
-        <div class="editor-wrapper">
-          <div class="line-numbers" id="tabLineNumbers">1</div>
-          <textarea
-            id="tabEditor"
-            spellcheck="false"
-            autocomplete="off"
-            autocorrect="off"
-            autocapitalize="off"
-            placeholder="$ digite ou cole seu HTML aqui..."
-          ></textarea>
-        </div>
+    <div class="tab-pane editor-pane">
+      <div class="panel-header">
+        <span class="panel-label">[FONTE]</span>
       </div>
+      <div class="editor-wrapper">
+        <textarea
+          id="fonte"
+          name="fonte"
+          spellcheck="false"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          placeholder="$ digite ou cole seu HTML aqui..."
+        ><!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Minha Página</title>
+</head>
+<body>
+  <h1>Olá, Mundo!</h1>
+  <p>Preview destrutivo via document.write().</p>
+  <script>
+    console.log('Executando no contexto da página de teste.');
+  </script>
+</body>
+</html></textarea>
+      </div>
+    </div>
 
-      <!-- PREVIEW (direita) -->
-      <div class="tab-pane preview-pane">
-        <div class="panel-header">
-          <span class="panel-label">[PREVIEW]</span>
-          <button class="back-btn" id="btnReload" title="Recarregar preview">[ Recarregar ]</button>
-        </div>
-        <iframe
-          id="tabPreview"
-          sandbox="allow-scripts allow-same-origin"
-          title="Preview"
-        ></iframe>
-      </div>
+    <div class="view-actions">
+      <button class="view-btn" id="btnTestar" value="Testar sua página" onclick="document.write(fonte.value)">Testar sua página</button>
     </div>
 
     <div class="toolbar">
@@ -69,7 +69,7 @@
     </div>
   </div>
 
-  <script src="shared.js"></script>
+  <script>window.fonte = document.getElementById('fonte');</script>
   <script src="tab.js"></script>
 </body>
 </html>

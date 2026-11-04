@@ -1,24 +1,14 @@
 /* ============================================
-   YKS HTML — Tab Layout (2 colunas)
+   YKS HTML — Tab Layout (preview destrutivo)
    Reutiliza sidepanel.css para cores/glow/scanlines.
-   Aqui ficam apenas os ajustes de layout da aba.
    ============================================ */
 
-/* Ocupa toda a viewport como aba inteira */
 html, body {
   height: 100%;
 }
 
 .terminal-window {
   height: 100vh;
-}
-
-/* Split editor (esq) + preview (dir) */
-.tab-split {
-  flex: 1;
-  display: flex;
-  min-height: 0;
-  overflow: hidden;
 }
 
 .tab-pane {
@@ -29,17 +19,10 @@ html, body {
 }
 
 .editor-pane {
-  flex: 1 1 50%;
-  border-right: 1px solid var(--border-dim);
+  flex: 1;
+  min-width: 0;
 }
 
-.preview-pane {
-  flex: 1 1 50%;
-}
-
-/* Editor reaproveita estilos do sidepanel.css
-   (.editor-wrapper, .line-numbers). O textarea precisa de regra
-   própria pois sidepanel.css estiliza apenas #codeEditor. */
 .editor-pane .editor-wrapper {
   flex: 1;
   min-height: 0;
@@ -47,6 +30,7 @@ html, body {
 
 .editor-pane textarea {
   flex: 1;
+  width: 100%;
   padding: 8px 10px;
   background: transparent;
   border: none;
@@ -67,20 +51,34 @@ html, body {
   opacity: 0.6;
 }
 
-.preview-pane iframe {
-  flex: 1;
-  border: none;
-  background: var(--bg-panel-alt);
+.view-actions {
+  display: flex;
+  justify-content: center;
+  padding: 10px 12px;
+  background: var(--bg-panel);
+  border-top: 1px solid var(--border-dim);
+  border-bottom: 1px solid var(--border-dim);
 }
 
-/* Em telas estreitas, empilha verticalmente */
-@media (max-width: 640px) {
-  .tab-split {
-    flex-direction: column;
-  }
+.view-btn {
+  background: var(--accent);
+  border: none;
+  color: #000;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 10px 32px;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 0 12px rgba(168,85,247,0.4);
+  transition: all 0.15s ease;
+}
 
-  .editor-pane {
-    border-right: none;
-    border-bottom: 1px solid var(--border-dim);
-  }
+.view-btn:hover {
+  background: var(--highlight);
+  box-shadow: 0 0 20px rgba(168,85,247,0.6);
+}
+
+.view-btn:active {
+  transform: scale(0.97);
 }

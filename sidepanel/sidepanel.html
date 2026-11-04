@@ -25,40 +25,42 @@
       <span class="cursor blink">█</span>
     </div>
 
-    <!-- EDITOR MODE -->
+    <!-- EDITOR / FONTE -->
     <div class="editor-section" id="editorSection">
       <div class="panel-header">
-        <span class="panel-label">[EDITOR]</span>
+        <span class="panel-label">[FONTE]</span>
         <span class="line-count" id="lineCount">1 lines</span>
       </div>
       <div class="editor-wrapper">
         <div class="line-numbers" id="lineNumbers">1</div>
         <textarea 
-          id="codeEditor" 
+          id="fonte" 
+          name="fonte"
           spellcheck="false" 
           autocomplete="off"
           autocorrect="off"
           autocapitalize="off"
           placeholder="$ digite ou cole seu HTML aqui..."
-        ></textarea>
+        ><!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Minha Página</title>
+</head>
+<body>
+  <h1>Olá, Mundo!</h1>
+  <p>Este é o preview destrutivo via document.write().</p>
+  <script>
+    console.log('Executando no contexto da página de teste.');
+  </script>
+</body>
+</html></textarea>
       </div>
     </div>
 
+    <!-- BOTÃO DESTRUTIVO -->
     <div class="view-actions" id="viewActions">
-      <button class="view-btn" id="btnView" title="Renderizar HTML">[ Ver HTML ]</button>
-    </div>
-
-    <!-- PREVIEW MODE -->
-    <div class="preview-section hidden" id="previewSection">
-      <div class="panel-header">
-        <span class="panel-label">[PREVIEW]</span>
-        <button class="back-btn" id="btnBack" title="Voltar ao editor">[ Voltar ]</button>
-      </div>
-      <iframe 
-        id="previewFrame" 
-        sandbox="allow-scripts allow-same-origin"
-        title="Preview"
-      ></iframe>
+      <button class="view-btn" id="btnTestar" value="Testar sua página" onclick="document.write(fonte.value)">Testar sua página</button>
     </div>
 
     <div class="toolbar">
@@ -120,11 +122,10 @@
     </div>
   </div>
 
+  <script>window.fonte = document.getElementById('fonte');</script>
   <script src="templates.js"></script>
   <script src="storage.js"></script>
   <script src="editor.js"></script>
-  <script src="shared.js"></script>
-  <script src="preview.js"></script>
   <script src="sidepanel.js"></script>
 </body>
 </html>

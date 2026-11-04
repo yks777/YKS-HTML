@@ -1,16 +1,15 @@
 /* ============================================
    YKS HTML — Main Controller
+   Preview destrutivo via document.write(fonte.value)
    ============================================ */
 
 const App = (() => {
-  let currentMode = 'editor';
   const LIVE_KEY = 'yks-live';
   const SENDER = 'sidepanel';
   let applyingExternal = false;
 
   async function init() {
     Editor.init();
-    Preview.init();
     await loadSavedCode();
     setupEventListeners();
     setupModals();
@@ -34,9 +33,6 @@ const App = (() => {
 
     applyingExternal = true;
     Editor.setCode(change.newValue.code);
-    if (currentMode === 'preview') {
-      Preview.update(change.newValue.code);
-    }
     applyingExternal = false;
   }
 
@@ -52,8 +48,6 @@ const App = (() => {
   }
 
   function setupEventListeners() {
-    document.getElementById('btnView').addEventListener('click', showPreview);
-    document.getElementById('btnBack').addEventListener('click', showEditor);
     document.getElementById('btnSave').addEventListener('click', openSaveModal);
     document.getElementById('btnLoad').addEventListener('click', openLoadModal);
     document.getElementById('btnTemplates').addEventListener('click', openTemplatesModal);
@@ -82,29 +76,6 @@ const App = (() => {
     }
   }
 
-  function showPreview() {
-    const code = Editor.getCode();
-    if (code.trim() === '') return;
-
-    currentMode = 'preview';
-    document.getElementById('editorSection').classList.add('hidden');
-    document.getElementById('viewActions').classList.add('hidden');
-    document.getElementById('previewSection').classList.remove('hidden');
-    document.getElementById('commandText').textContent = 'preview index.html';
-
-    Preview.update(code);
-  }
-
-  function showEditor() {
-    currentMode = 'editor';
-    document.getElementById('editorSection').classList.remove('hidden');
-    document.getElementById('viewActions').classList.remove('hidden');
-    document.getElementById('previewSection').classList.add('hidden');
-    document.getElementById('commandText').textContent = 'cat index.html';
-
-    Editor.focus();
-  }
-
   function setupModals() {
     document.getElementById('closeTemplates').addEventListener('click', closeTemplatesModal);
     document.getElementById('closeSave').addEventListener('click', closeSaveModal);
@@ -122,13 +93,9 @@ const App = (() => {
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        if (currentMode === 'preview') {
-          showEditor();
-        } else {
-          document.querySelectorAll('.modal-overlay').forEach(overlay => {
-            overlay.classList.remove('active');
-          });
-        }
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+          overlay.classList.remove('active');
+        });
       }
     });
   }
